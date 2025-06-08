@@ -1,10 +1,11 @@
-version: "3"
+version: "1"
 services:
   photoviewer:
     build: .
     ports:
       - "3000:3000" # Or BrowserSync’s port
     volumes:
-      - /volume1/photos:/app/photos # Mount photos
+      - ./:/app/public # Your static app files
+      - /volume1/homes/jeremy/Photos:/app/photos # Mount photos
     environment:
       - NODE_ENV=development
