@@ -5,7 +5,7 @@ services:
     ports:
       - "3000:3000" # Or BrowserSync’s port
     volumes:
-      - ./:/app/public # Your static app files
+      - ./public:/app/public # Your static app files
       - /volume1/homes/jeremy/Photos:/app/photos # Mount photos
     environment:
       - NODE_ENV=development
