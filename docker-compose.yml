@@ -1,11 +1,20 @@
-version: "1"
+version: "3.9"
+
 services:
-  photoviewer:
-    build: .
-    ports:
-      - "3000:3000" # Or BrowserSync’s port
-    volumes:
-      - ./public:/public # Your static app files
-      - /volume1/homes/jeremy/Photos/seaMoss_photos:/photos # Mount photos
+  seamoss:
+    build: ./    # path to the Dockerfile folder
+    image: seamoss-slideshow
+    container_name: seamoss
+    restart: unless-stopped
     environment:
-      - NODE_ENV=development
+      REPO_URL:   https://github.com/xjeremy/seaMoss.git
+      REPO_BRANCH: main
+      DEPLOY_PATH: /site
+      BS_PORT:     3000
+      GAD_PORT:    8000
+    volumes:
+      # photos only – no site mount
+      - /volume1/homes/jeremy/Photos/seaMoss_photos:/photos:ro
+    ports:
+      - "3000:3000"   # BrowserSync to browsers
+      - "8000:8000"   # Git-Auto-Deploy webhook
